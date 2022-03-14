@@ -21,18 +21,22 @@ const Login = () => {
   }
   return ( 
     <div className="container">
-      <h1>Login</h1>
       <div className="row">
-        <div className="col-md-6">
-          <label>Email address</label>
-          <input type="email" className="form-control" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-        </div>
-        <div className="col-md-6">
-          <label>Password</label>
-          <input type="password" className="form-control" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
-        </div>
-        <div className="col-md-6 mt-2">
-          <button className="btn btn-primary" onClick={login}>Login</button>
+        <div className="col-sm-8 mx-auto">  
+          <h1>Login</h1>
+          <div className="row">
+            <div className="col-md-12">
+              <label>Email address</label>
+              <input type="email" className="form-control" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+            </div>
+            <div className="col-md-12">
+              <label>Password</label>
+              <input type="password" className="form-control" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+            </div>
+            <div className="col-md-12 mt-2">
+              <button className="btn btn-primary" onClick={login}>Login</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
