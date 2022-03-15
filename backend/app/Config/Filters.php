@@ -67,6 +67,7 @@ class Filters extends BaseConfig
      * @var array
      */
     public $filters = [
+        //add any api endpoints here that you want to be protected by oauth
         'oauthfilter' => ['before' => ['blogs','blogs/*']]
     ];
 }
