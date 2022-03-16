@@ -10,8 +10,8 @@ import Login from './Login';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Login/>
-    {/* <Home/> */}
+    {/* confirm if user is login to show the home component */}
+    {localStorage.getItem('user-info') ? <Home /> : <Login />}
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -29,8 +29,8 @@ class Users extends ResourceController
         }
         $rules = [
             'user_username' => 'required|min_length[3]|max_length[100]',
-            'user_name' => 'required|min_length[3]|max_length[100]',
-            'user_surname' => 'required|min_length[3]|max_length[100]',
+            'user_name' => 'min_length[3]|max_length[100]',
+            'user_surname' => 'min_length[3]|max_length[100]',
             'user_email' => 'required|valid_email|is_unique[tbl_users.user_email]|min_length[3]|max_length[255]',
             'user_password' => 'required|min_length[8]|max_length[255]',
             'user_password_confirm' => 'required|matches[user_password]'
