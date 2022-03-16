@@ -1,22 +1,32 @@
 import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import axios from 'axios';
 import GLOBAL from '../GLOBAL';
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+  const [register, setRegister] = useState(false);
+  const history = useHistory();
   
   //send the data to the server
   const handelRegister = async () => {
     //send data to the register api
     await axios.post(`${GLOBAL.BASE_URL}/users/register`, {
       user_username: username,
+      user_name: name,
+      user_surname: surname,
       user_email: email,
       user_password: password,
       user_password_confirm: confirmPass
     })
+    setRegister(true);
+  }
+  if(register){
+    history.push('/');
   }
   return ( 
     <div className="registerform">
@@ -32,6 +42,24 @@ const RegisterForm = () => {
                 className="form-control" 
                 placeholder="username" 
                 onChange={(e)=>setUsername(e.target.value)}
+                />
+              </div>
+              <div className="col-md-12">
+                <label>Name</label>
+                <input 
+                type="text" 
+                className="form-control" 
+                placeholder="Name" 
+                onChange={(e)=>setName(e.target.value)}
+                />
+              </div>
+              <div className="col-md-12">
+                <label>Surname</label>
+                <input 
+                type="text" 
+                className="form-control" 
+                placeholder="Surname" 
+                onChange={(e)=>setSurname(e.target.value)}
                 />
               </div>
               <div className="col-md-12">
