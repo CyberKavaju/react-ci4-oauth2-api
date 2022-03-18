@@ -1,30 +1,45 @@
-import {useState} from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect , useState} from 'react';
+import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
 import Nav from './comp/Nav';
 import NewNote from './comp/NewNote';
 import Notes from "./comp/Notes";
 
 const Home = () => {
-  const [notes, setNotes] = useState([
-    {id: 1, title: 'HTML is easy', body: 'and here is text telling you why'},
-    {id: 2, title: 'CSS is easy', body: 'and here is text telling you why'},
-    {id: 3, title: 'JS is easy', body: 'and here is text telling you why'},
-    {id: 4, title: 'PHP is easy', body: 'and here is text telling you why'},
-    {id: 5, title: 'PYTHON is easy', body: 'and here is text telling you why'}
-  ]);
+  const [notes, setNotes] = useState(['']);
+  const history = useHistory();
+  const handleBlogs = () =>{
+    const userInfo = JSON.parse(localStorage.getItem('user-info'));
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + userInfo.access_token
+      }
+    };
+    axios.get('/blogs', config)
+    .then(res => res.data)
+    .then(data => {setNotes(data); console.log(data)})
+    .catch(err => console.log(err));
+  }
+  useEffect(() => {
+    handleBlogs();
+  }, []);
+  const handleLogout = () => {localStorage.removeItem('user-info'); history.push('/');}
   return ( 
     <Router>
-      <div className='container'>
-        <Nav/>
+        <Nav data={handleLogout}/>
         <Switch>
-          <Route exact path="/">
+          <div className="container">
+          <Route path="/">
             <Notes notes={notes}/>
           </Route>
-          <Route path="/new">
+          <Route path="/home">
+            <Notes notes={notes}/>
+          </Route>
+          <Route exact path="/new">
             <NewNote/>
           </Route>
+          </div>
         </Switch>
-      </div>
     </Router>
    );
 }

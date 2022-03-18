@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import axios from 'axios';
-import GLOBAL from '../GLOBAL';
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
   const [name, setName] = useState('');
@@ -11,18 +10,17 @@ const RegisterForm = () => {
   const [confirmPass, setConfirmPass] = useState('');
   const [register, setRegister] = useState(false);
   const history = useHistory();
-  
   //send the data to the server
   const handelRegister = async () => {
     //send data to the register api
-    await axios.post(`${GLOBAL.BASE_URL}/users/register`, {
+    await axios.post(`/users/register`, {
       user_username: username,
       user_name: name,
       user_surname: surname,
       user_email: email,
       user_password: password,
       user_password_confirm: confirmPass
-    })
+    }).then(res => res.json()).then(data => {console.log(data)}).catch(err => console.log(err));
     setRegister(true);
   }
   if(register){
@@ -30,7 +28,6 @@ const RegisterForm = () => {
   }
   return ( 
     <div className="registerform">
-      <div className="container">
         <div className="row">
           <div className="col-sm-8 mx-auto">
             <h1>Register</h1>
@@ -96,7 +93,6 @@ const RegisterForm = () => {
             <p>You already have an account? <Link to="/">Login</Link></p>
           </div>
         </div>
-      </div>
     </div>
    );
 }

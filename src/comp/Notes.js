@@ -3,9 +3,10 @@ const Notes = ({notes}) => {
     <div className="notes">
       <h1>Notes</h1>
       {notes.map(note => (
-        <div key={note.id}>
-          <h3>{note.title}</h3>
-          <p>{note.body}</p>
+        <div key={note.post_id}>
+          <h3>{note.post_title}</h3>
+          <p>{note.post_description}</p>
+          <small>created: {notes.post_created}</small>
         </div>
       ))}
     </div>

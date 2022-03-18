@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import { useHistory , Link} from 'react-router-dom';
+import axios from 'axios';
 import GLOBAL from '../GLOBAL';
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -14,7 +15,6 @@ const LoginForm = () => {
     params.append('client_id', GLOBAL.OAUTH2_CLIENT_ID);
     params.append('client_secret', GLOBAL.OAUTH2_CLIENT_SECRET);
     //send the data to the server
-    console.log(params.toString());
     fetch(`${GLOBAL.BASE_URL}/users/login`, {
       method: 'POST',
       headers: {
@@ -27,17 +27,16 @@ const LoginForm = () => {
       if(data.access_token){
         //if the user is login then save the token to the local storage
         localStorage.setItem('user-info', JSON.stringify(data));
-        history.push('/');
+        history.push('/home');
       }
     })
-
+    .catch(err => console.log(err));
   }
   return ( 
     <div className="loginform">
-      <div className="container">
       <div className="row">
-        <div className="col-sm-8 mx-auto">  
-          <h1>Login</h1>
+        <div className="col-sm-10 mx-auto">  
+          <h1 className='card-title text-center border-bottom'>Login</h1>
           <div className="row">
             <div className="col-md-12">
               <label>Username</label>
@@ -52,11 +51,10 @@ const LoginForm = () => {
             </div>
           </div>
         </div>
-        <div className="col-sm-8 mx-auto mt-3 border-top">
+        <div className="col-sm-10 mx-auto mt-3 border-top">
           <p>You don't have an account? <Link to="/register">Register</Link></p>
         </div>
       </div>
-    </div>
     </div>
    );
 }

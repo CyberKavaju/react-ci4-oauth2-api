@@ -5,18 +5,18 @@ const Login = () => {
   return ( 
     <Router>
       <div className="container">
-        <div className="logo">
-          <h1>Logo</h1>
+        <div className="card position-absolute top-50 start-50 translate-middle">
+          <div className="card-body">
+            <Switch>
+              <Route exact path="/">
+                <LoginForm/>
+              </Route>
+              <Route exact path="/register">
+                <RegisterForm/>
+              </Route>
+            </Switch>
+          </div>
         </div>
-      <Switch>
-        
-        <Route exact path="/">
-          <LoginForm/>
-        </Route>
-        <Route path="/register">
-          <RegisterForm/>
-        </Route>
-      </Switch>
       </div>
     </Router>
    );
