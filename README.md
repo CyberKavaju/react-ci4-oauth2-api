@@ -1,7 +1,7 @@
-#simple REACT/CODEIGNITER4/OAUTH2/APIREST app
+# simple REACT/CODEIGNITER4/OAUTH2/APIREST app
 Base apps with this stack for simple web apps and posible native apps
 
-##Install
+## Install
 for the front end just do a 
 npm install 
 for the back end go into the backend folder and do
